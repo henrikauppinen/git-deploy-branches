@@ -7,6 +7,8 @@ conffilename=./conf.cfg
 if [ -e $conffilename ]; then
 	. $conffilename
 	link_config=$rootdir/shared/links.cfg
+else
+	$1=""
 fi
 
 pruning() {
@@ -111,7 +113,7 @@ elif [ "$1" == "fetch" ]; then
 elif [ "$1" == "prune" ]; then
 	pruning
 else
-	echo "Usage: git-deploy-branches.sh [install|update]"
+	echo "Usage: git-deploy-branches.sh [install|update|fetch|prune]"
         echo ""
         echo "Arguments:"
         echo "   install: Initial installation. Configuration file is created in the same directory where the script is launched."
