@@ -2,10 +2,12 @@
 # Script for deploying all repository branches
 # Author: Henri Kauppinen
 
-conffilename=./conf.cfg
+basedir=$(dirname $0)
 
-if [ -e $conffilename ]; then
-	. $conffilename
+conffilename=conf.cfg
+
+if [ -e $basedir/$conffilename ]; then
+	. $basedir/$conffilename
 	link_config=$rootdir/shared/links.cfg
 else
 	$1=""
