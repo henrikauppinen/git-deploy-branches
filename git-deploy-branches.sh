@@ -46,7 +46,7 @@ create_links(){
 update(){
 	cd $rootdir
 
-        (cd master; git pull -q;git branch -r) | sed -e '/master/,+d' -e 's/origin\///' | while read branchname ;
+        (cd master; git pull origin master -q;git branch -r) | sed -e '/master/,+d' -e 's/origin\///' | while read branchname ;
         do
           	if [ -d $branchname ]; then
 			echo "Checking updates for $branchname"
