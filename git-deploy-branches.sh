@@ -11,14 +11,14 @@ indexfile=$deployment_dir/index.html
 
 init_local_repository(){
     if [ ! -d $local_repository_dir ]; then
-        mkdir $local_repository_dir
+        mkdir -p $local_repository_dir
     fi
 
     (cd $local_repository_dir; git clone $remote_repository .)
 }
 
 link_files(){
-    echo "Copying files to $deployment_dir/$1"
+    echo "Copying additional files to $deployment_dir/$1"
     cp -R $basedir/app_files/* $deployment_dir/$1/
 }
 
@@ -26,24 +26,24 @@ deploy_branch() {
     echo "Deploying $1"
 
     if [ ! -d $deployment_dir ]; then
-        mkdir $deployment_dir
+        mkdir -p $deployment_dir
     fi
 
     if [ ! -d $deployment_dir/$1 ]; then
-        mkdir $deployment_dir/$1
+        mkdir -p $deployment_dir/$1
     fi
 
-    rsync -ap -v --stats --exclude ".git" --exclude ".gitignore" --delete --delete-excluded $local_repository_dir/ $deployment_dir/$1
+    rsync -ap --stats --exclude ".git" --delete --delete-excluded $local_repository_dir/ $deployment_dir/$1
 
-    git log -p -1 > $deployment_dir/$1/gitlog.txt
+    # git log -p -1 > $deployment_dir/$1/gitlog.txt
 
 }
 
 make_indexfile_row(){
-    echo "<a href='$1/'>$1</a><br />" >> $indexfile
-    echo "<pre>" >> $indexfile
-    git log -p -1 >> $indexfile
-    echo "</pre><hr/>" >> $indexfile
+    echo "<div class='branchrow'><a href='$1/'>$1</a> - <a href='https://github.com/$repository_reference/compare/$1'>Compare on Github.com</a><br />" >> $indexfile
+    echo "<div class='lastcommit'><pre>" >> $indexfile
+    git log -1 >> $indexfile
+    echo "</pre></div></div><hr/>" >> $indexfile
 }
 
 # main
@@ -61,8 +61,6 @@ git remote prune origin
 git fetch --all
 
 for branch in `git branch -r | grep -v HEAD | sed -e 's/origin\///'`; do
-        
-    echo "Checking out $branch"
 
     git checkout $branch
     git pull
