@@ -30,3 +30,5 @@ Resulting deployment directory structure:
 	/var/www/html/wwwroot/deploymentdirectory/master/
 	/var/www/html/wwwroot/deploymentdirectory/featurebranch1/
 	/var/www/html/wwwroot/deploymentdirectory/featurebranch2/
+
+Script will create a index.html -page into deployment_dir which includes links to branches, latest commit message from each branch and also link to github compare-page.
