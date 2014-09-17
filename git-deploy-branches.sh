@@ -19,7 +19,8 @@ init_local_repository(){
 
 link_files(){
     echo "Copying additional files to $deployment_dir/$1"
-    cp -R $basedir/app_files/ $deployment_dir/$1/
+    cp -R $basedir/app_files/* $deployment_dir/$1/
+    cp -R $basedir/app_files/.[a-zA-Z0-9]* $deployment_dir/$1/
 }
 
 deploy_branch() {
