@@ -8,13 +8,9 @@ Configuration
 
 Configuration file conf.cfg must include these lines:
 
-    remote=(url to git repository)
-    rootdir=(path to wwwroot)
+    remote_repository=git@github.com:account/repository.git
+    repository_reference=account/repository
+    local_repository_dir=/tmp/templocalrepositorydir
+    deployment_dir=/var/www/html/wwwroot/deploymentdirectory
 
-Additional files can be linked to application wwwroot by using link configuration file in shared/links.cfg:
-
-    testfile.php testfile.php
-    db.php configuration/db.php
-    [sourcefile] [target]
-
-Files are placed in shared/ -folder and links.cfg file will link these files to application directory.
+Additional files can be copied to application wwwroot by placing the files in app_files/ -directory (ie. configuration files). Use same file and directory structure as in your application so that the files go to correct directories.
