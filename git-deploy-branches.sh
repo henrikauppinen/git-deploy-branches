@@ -57,6 +57,12 @@ fi
 # reset index.html
 
 echo "<html><head><title>git-deploy-branches</title></head><body>" > $indexfile
+echo "<h2>Deployed branches from $repository_reference</h2>" >> $indexfile
+
+
+timestamp=$(date)
+
+echo "<p><b>Last updated:</b> $timestamp<br/><b>Remote repository:</b> $remote_repository</p><hr/>" >> $indexfile
 
 cd $local_repository_dir
 
